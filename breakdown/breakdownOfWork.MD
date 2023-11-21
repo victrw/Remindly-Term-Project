@@ -16,3 +16,5 @@ I worked on the following tasks:
 
 Victor Wong:
 I worked on the following tasks:
+1. <implmenting passport> - Added and changed all the required files and code required for passport and usermodel.js
+2. <login function> - Users are now able to login and see their own reminders
