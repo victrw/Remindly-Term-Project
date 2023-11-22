@@ -4,7 +4,7 @@ const ejsLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
-const { ensureAuthenticated } = require("./middleware/checkAuth")
+const { ensureAuthenticated, forwardAuthenticated } = require("./middleware/checkAuth")
 
 const app = express();
 app.set("view engine", "ejs");
@@ -60,7 +60,7 @@ app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete
 
 
 app.use(indexRoute);
-app.use(authRoute);
+app.use(forwardAuthenticated, authRoute);
 // app.use("/", indexRoute);
 // app.use("/login", authRoute);
 // app.get("/register", authController.register);
@@ -73,3 +73,6 @@ app.listen(3001, function () {
     "Server running. Visit: http://localhost:3001/ in your browser 🚀"
   );
 });
+
+
+// admin use req.sessionStore
