@@ -6,9 +6,9 @@ let remindersController = {
     const user = userModel.findById(userID);
 
     if (user) {
-      res.render("reminder/index", { reminders: user.reminders || [] });
+      res.render("reminder/index.ejs", { reminders: user.reminders || [] });
     } else {
-      res.render("reminder/index", { reminders: [] });
+      res.render("reminder/index.ejs", { reminders: [] });
     }
   },
 
@@ -24,7 +24,7 @@ let remindersController = {
     if (searchResult != undefined) {
       res.render("reminder/single-reminder", { reminderItem: searchResult });
     } else {
-      res.render("reminder/index", { reminders: database[0].reminders });
+      res.render("reminder/index.ejs", { reminders: database[0].reminders });
     }
   },
 
@@ -71,7 +71,7 @@ let remindersController = {
       };
       res.redirect("/reminders");
     } else {
-      res.render("reminder/index", { reminders: database[0].reminders });
+      res.render("reminder/index.ejs", { reminders: database[0].reminders });
     }
   },
 

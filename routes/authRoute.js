@@ -9,14 +9,14 @@ router.get("/login", forwardAuthenticated, (req, res) => res.render("auth/login"
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/reminders",
+    successRedirect: "/reminder/index",
     failureRedirect: "/login",
   })
 );
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/login");
 });
 
 module.exports = router;

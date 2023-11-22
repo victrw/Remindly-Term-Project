@@ -29,6 +29,4 @@ passport.deserializeUser(function (id, done) {
   }
 });
 
-
-passport.use(localLogin);
-module.exports = passport;
+module.exports = passport.use(localLogin);
