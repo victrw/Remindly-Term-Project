@@ -49,8 +49,6 @@ app.use((req, res, next) => {
 });
 
 // Routes start here
-app.use(indexRoute);
-app.use(authRoute);
 app.get("/reminders", reminderController.list);
 app.get("/reminder/new", reminderController.new);
 app.get("/reminder/:id", reminderController.listOne);
@@ -60,6 +58,10 @@ app.post("/reminder/update/:id", reminderController.update);
 app.post("/reminder/delete/:id", reminderController.delete);
 
 
+app.use(indexRoute);
+app.use(authRoute);
+// app.use("/", indexRoute);
+// app.use("/login", authRoute);
 // app.get("/register", authController.register);
 // app.get("/login", authController.login);
 // app.post("/register", authController.registerSubmit);

@@ -35,9 +35,9 @@ let remindersController = {
         completed: false,
       };
       req.user.reminders.push(reminder);
-      res.redirect("/reminder/index");
+      res.redirect("/reminders");
     } else {
-      res.redirect("/reminder/index");
+      res.redirect("/reminders");
     }
   },
 
@@ -66,9 +66,9 @@ let remindersController = {
         id: reminderToUpdate,
         ...updatedReminder,
       };
-      res.redirect("/reminder/index");
+      res.redirect("/reminders");
     } else {
-      res.render("reminder/index", { reminders: req.user.reminders });
+      res.render("reminders/index", { reminders: req.user.reminders });
     }
   },
 
@@ -80,7 +80,7 @@ let remindersController = {
     if (reminderIndex != -1) {
       req.user.reminders.splice(reminderIndex, 1);
     }
-    res.redirect("/reminder/index");
+    res.redirect("/reminders");
   },
 };
 
