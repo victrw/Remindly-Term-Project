@@ -12,6 +12,7 @@ I worked on the following tasks:
 November 24th (Second Sprint Complete)
 Chris Tang:
 I worked on the following tasks:
+1. <update function> - Fixed the logic and it works now
 
 
 Victor Wong:
