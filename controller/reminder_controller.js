@@ -59,7 +59,7 @@ let remindersController = {
     let updatedReminder = {
       title: req.body.title,
       description: req.body.description,
-      completed: false,
+      completed: req.body.completed === "true",
     };
     let reminderIndex = database[0].reminders.findIndex(function (reminder) {
       return reminder.id == reminderToUpdate;
