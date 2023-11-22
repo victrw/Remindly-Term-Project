@@ -12,6 +12,9 @@ I worked on the following tasks:
 November 24th (Second Sprint Complete)
 Chris Tang:
 I worked on the following tasks:
+1. <update function> - Fixed the logic and it works now
+2. <made logout button in navbar> - made navbar in navbar.ejs
+3. <fixed logout button> - logout now goes directly back into login page
 
 
 Victor Wong:

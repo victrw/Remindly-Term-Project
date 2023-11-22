@@ -3,11 +3,11 @@ const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 
 router.get("/", (req, res) => {
-  res.send("welcome");
+  res.send("/views/index.ejs");
 });
 
 router.get("/reminders", ensureAuthenticated, (req, res) => {
-  res.render("reminders", {
+  res.render("/reminders", {
     user: req.user,
   });
 });
