@@ -56,7 +56,7 @@ let remindersController = {
     let updatedReminder = {
       title: req.body.title,
       description: req.body.description,
-      completed: false,
+      completed: req.body.completed == "true",
     };
     let reminderIndex = req.user.reminders.findIndex(function (reminder) {
       return reminder.id == reminderToUpdate;
