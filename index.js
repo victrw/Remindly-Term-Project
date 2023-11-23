@@ -61,11 +61,12 @@ app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete
 
 app.use(indexRoute);
 app.use(authRoute);
+app.post("/register", authController.registerSubmit);
+app.get("/register", authController.register);
+
 // app.use("/", indexRoute);
 // app.use("/login", authRoute);
-// app.get("/register", authController.register);
 // app.get("/login", authController.login);
-// app.post("/register", authController.registerSubmit);
 // app.post("/login", authController.loginSubmit);
 
 app.listen(3001, function () {
