@@ -35,6 +35,7 @@ const userModel = {
     if (user) {
       return user;
     }
+    // add feature that alerts user that the email doesn't exist
     return null;
   },
   findById: (id) => {
