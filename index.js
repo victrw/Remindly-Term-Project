@@ -60,7 +60,7 @@ app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete
 
 
 app.use(indexRoute);
-app.use(forwardAuthenticated, authRoute);
+app.use(authRoute);
 // app.use("/", indexRoute);
 // app.use("/login", authRoute);
 // app.get("/register", authController.register);
