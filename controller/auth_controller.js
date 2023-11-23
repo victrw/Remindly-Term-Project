@@ -1,4 +1,5 @@
-let database = require("../database");
+let { database } = require("../models/userModel");
+let userController = require("./userController");
 
 let authController = {
   login: (req, res) => {
@@ -22,18 +23,22 @@ let authController = {
 
   registerSubmit: (req, res) => {
     const { email, password } = req.body;
-    let user = database.users.find((user) => user.email === email);
-    if (user) {
-      res.redirect("/register");
+  
+    const checkingUser = userController.getUserByEmailIdAndPassword(email, password);
+  
+    if (checkingUser) {
+      // add a alert message here
+      res.render("auth/register");
     } else {
-      database.users.push({
-        id: database.users.length + 1,
+      const newUser = {
+        id: database.length + 1,
         email: email,
         password: password,
-      });
+      };
+      database.push(newUser);
+      console.log("User created successfully")
       res.redirect("/login");
     }
-  },
-};
+  }};
 
 module.exports = authController;

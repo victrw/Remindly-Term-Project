@@ -37,17 +37,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  console.log(`User details are: `);
-  console.log(req.user);
 
-  console.log("Entire session object:");
-  console.log(req.session);
+// // error checking
+// app.use((req, res, next) => {
+//   console.log(`User details are: `);
+//   console.log(req.user);
 
-  console.log(`Session details are: `);
-  console.log(req.session.passport);
-  next();
-});
+//   console.log("Entire session object:");
+//   console.log(req.session);
+
+//   console.log(`Session details are: `);
+//   console.log(req.session.passport);
+//   next();
+// });
 
 // Routes start here
 app.get("/reminders", ensureAuthenticated, reminderController.list);
@@ -57,15 +59,17 @@ app.get("/reminder/:id/edit",  ensureAuthenticated, reminderController.edit);
 app.post("/reminder/",  ensureAuthenticated, reminderController.create);
 app.post("/reminder/update/:id",  ensureAuthenticated, reminderController.update);
 app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete);
+app.get("/register", authController.register);
+app.post("/register", authController.registerSubmit);
 
 
 app.use(indexRoute);
 app.use(authRoute);
+app.use(authRoute);
+
 // app.use("/", indexRoute);
 // app.use("/login", authRoute);
-// app.get("/register", authController.register);
 // app.get("/login", authController.login);
-// app.post("/register", authController.registerSubmit);
 // app.post("/login", authController.loginSubmit);
 
 app.listen(3001, function () {
