@@ -4,7 +4,7 @@ const ejsLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
-const { ensureAuthenticated, forwardAuthenticated } = require("./middleware/checkAuth")
+const { ensureAuthenticated, forwardAuthenticated, isAdmin } = require("./middleware/checkAuth")
 
 const app = express();
 app.set("view engine", "ejs");
@@ -56,6 +56,7 @@ app.get("/reminders", ensureAuthenticated, reminderController.list);
 app.get("/reminder/new",  ensureAuthenticated, reminderController.new);
 app.get("/reminder/:id",  ensureAuthenticated, reminderController.listOne);
 app.get("/reminder/:id/edit",  ensureAuthenticated, reminderController.edit);
+app.get("/dashboard", isAdmin, reminderController.admin);
 app.post("/reminder/",  ensureAuthenticated, reminderController.create);
 app.post("/reminder/update/:id",  ensureAuthenticated, reminderController.update);
 app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete);
@@ -64,7 +65,6 @@ app.post("/register", authController.registerSubmit);
 
 
 app.use(indexRoute);
-app.use(authRoute);
 app.use(authRoute);
 
 // app.use("/", indexRoute);
