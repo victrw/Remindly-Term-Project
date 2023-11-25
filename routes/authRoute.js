@@ -27,4 +27,8 @@ router.get("/logout", (req, res) => {
   });
 });
 
+
+router.get("/dashboard", isAdmin, (req, res) => {
+  res.render("auth/dashboard");
+});
 module.exports = router;
