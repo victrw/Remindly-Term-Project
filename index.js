@@ -38,16 +38,36 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// admin dashboard
+app.get("/dashboard", isAdmin, (req, res) => {
+  console.log(`Req Session`, req.session);
+  res.render("auth/dashboard", { user: req.user, session: req.session  });
+});
+
+app.post("/dashboard/revoke", isAdmin, (req, res) => {
+  const userIdRevoke = req.params.userId;
+  req.sessionStore.destroy(userIdRevoke, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");}
+  });
+});
+
 // // error checking
 app.use((req, res, next) => {
-  console.log(`User details are: `);
-  console.log(req.user);
+  // console.log(`User details are: `);
+  // console.log(req.user);
 
-  console.log("Entire session object:");
-  console.log(req.session);
+  // console.log("Entire session object:");
+  // console.log(req.session);
 
   console.log(`Session details are: `);
-  console.log(req.session.passport);
+  // console.log(req.session.passport);
+  const sample = req.sessionStore.all((err, sessions) => {
+    if (err) { console.log(err) }
+    console.log(sessions);
+  });
   next();
 });
 

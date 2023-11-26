@@ -134,3 +134,7 @@ footer.footer {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
+.dashboard {
+  padding-left: 500px;
+}
