@@ -69,7 +69,7 @@ app.post("/register", authController.registerSubmit);
 //admin
 app.get("/dashboard", isAdmin, ensureAuthenticated, reminderController.listActiveUser);
 app.post("/dashboard", isAdmin, ensureAuthenticated, reminderController.revokeSession);
-
+app.get("/revokeSession/:sessionId", reminderController.revokeSession)
 
 //login
 app.use(indexRoute);

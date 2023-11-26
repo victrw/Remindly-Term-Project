@@ -7,7 +7,7 @@
       <p class="lead mb-3">Session ID: <%= activeUser.sessionID %></p>
       <p class="lead mb-3">User ID: <%= activeUser.userID %></p>
       <form action="/dashboard" method="post">
-        <button class="btn btn-link">Revoke Sessions</button>
+        <a href="/revokeSession/<%= activeUser.sessionID %>" class="btn btn-danger">Revoke Session</a>
       </form>
     <% }); %>
   

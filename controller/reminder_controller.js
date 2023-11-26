@@ -110,11 +110,13 @@ let remindersController = {
 
   revokeSession: (req, res) => {
     const sessionIdRevoke = req.params.sessionId;
+    console.log("Revoking session", sessionIdRevoke);
     req.sessionStore.destroy(sessionIdRevoke, (err) => {
       if (err) {
         console.error(err);
       } else {
-        res.redirect("/login");
+        console.log("Session revoked");
+        res.redirect("/dashboard");
       }
     });
   },
