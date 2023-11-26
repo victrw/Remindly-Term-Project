@@ -2,23 +2,9 @@ let { database } = require("../models/userModel");
 let userController = require("./userController");
 
 let authController = {
-  login: (req, res) => {
-    res.render("auth/login");
-  },
 
   register: (req, res) => {
     res.render("auth/register");
-  },
-
-  loginSubmit: (req, res) => {
-    const { email, password } = req.body;
-    let user = database.users.find((user) => user.email === email);
-    if ( user && user.password === password ) {
-      req.session.user = user;
-      res.redirect("/reminders");
-    } else {
-      res.redirect("/login");
-    }
   },
 
   registerSubmit: (req, res) => {
@@ -34,6 +20,7 @@ let authController = {
         id: database.length + 1,
         email: email,
         password: password,
+        admin: false,
         reminders: [],
       };
       database.push(newUser);
@@ -41,5 +28,7 @@ let authController = {
       res.redirect("/login");
     }
   }};
+
+
 
 module.exports = authController;

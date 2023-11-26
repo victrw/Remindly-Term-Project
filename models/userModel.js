@@ -4,7 +4,7 @@ let database = [
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
-    admin: "false",
+    admin: false,
     reminders: [
       {
         id: 1,
@@ -19,23 +19,23 @@ let database = [
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
-    admin: "false",
+    admin: false,
     reminders: []
   },
   {
     id: 3,
-    name: "Jonathan Chen",
-    email: "jonathan123@gmail.com",
-    password: "jonathan123!",
-    admin: "false",
-    reminders: []
+    name: "victor",
+    email: "v@gmail.com",
+    password: "123",
+    admin: true,
+    reminders: [],
   },
   {
     id: 4,
     name: "Kris",
     email: "kris@gmail.com",
     password: "kris123",
-    admin: "true",
+    admin: true,
     reminders: [],
   },
 ];

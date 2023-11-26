@@ -3,6 +3,7 @@ let { database, userModel }= require("../models/userModel");
 let remindersController = {
   list: (req, res) => {
     if (req.user) {
+      res.locals.userAdmin = req.user.admin;
       res.render("reminder/index", { reminders: req.user.reminders});
     }
   },
@@ -83,8 +84,37 @@ let remindersController = {
     res.redirect("/reminders");
   },
 
-  admin: (req, res) => {
-    res.render("auth/dashboard", {user : req.user});
+  ActiveUser: (req, res) => {
+    if (req.user) {
+      let users = req.sessionStore.all((err, sessions) => {
+        if (err) {
+          console.log(err);
+        }
+        return sessions;
+      });
+      let ActiveUser = [
+        {
+          sessionID: user.sessionId,
+          UserId: user.id,
+
+        }
+      ]
+      res.locals.ActiveUser = ActiveUser;
+
+
+      res.render("auth/dashboard", { user: req.user, session: req.session });
+    }
+  },
+
+  revokeSession: (req, res) => {
+    const sessionIdRevoke = req.params.sessionId;
+    req.sessionStore.destroy(sessionIdRevoke, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.redirect("/login");
+      }
+    });
   },
 };
 

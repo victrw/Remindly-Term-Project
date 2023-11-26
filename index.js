@@ -38,59 +38,42 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// admin dashboard
-app.get("/dashboard", isAdmin, (req, res) => {
-  console.log(`Req Session`, req.session);
-  res.render("auth/dashboard", { user: req.user, session: req.session  });
-});
-
-app.post("/dashboard/revoke", isAdmin, (req, res) => {
-  const userIdRevoke = req.params.userId;
-  req.sessionStore.destroy(userIdRevoke, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/login");}
-  });
-});
-
 // // error checking
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
   // console.log(`User details are: `);
   // console.log(req.user);
 
   // console.log("Entire session object:");
   // console.log(req.session);
 
-  console.log(`Session details are: `);
+  // console.log(`Session details are: `);
   // console.log(req.session.passport);
-  const sample = req.sessionStore.all((err, sessions) => {
-    if (err) { console.log(err) }
-    console.log(sessions);
-  });
-  next();
-});
+//   const sample = req.sessionStore.all((err, sessions) => {
+//     if (err) { console.log(err) }
+//     console.log(sessions);
+//   });
+//   next();
+// });
 
 // Routes start here
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 app.get("/reminder/new",  ensureAuthenticated, reminderController.new);
 app.get("/reminder/:id",  ensureAuthenticated, reminderController.listOne);
 app.get("/reminder/:id/edit",  ensureAuthenticated, reminderController.edit);
-app.get("/dashboard", isAdmin, reminderController.admin);
 app.post("/reminder/",  ensureAuthenticated, reminderController.create);
 app.post("/reminder/update/:id",  ensureAuthenticated, reminderController.update);
 app.post("/reminder/delete/:id",  ensureAuthenticated, reminderController.delete);
 app.get("/register", authController.register);
 app.post("/register", authController.registerSubmit);
 
+//admin
+app.get("/dashboard", isAdmin, reminderController.ActiveUser);
 
+
+//login
 app.use(indexRoute);
 app.use(authRoute);
 
-// app.use("/", indexRoute);
-// app.use("/login", authRoute);
-// app.get("/login", authController.login);
-// app.post("/login", authController.loginSubmit);
 
 app.listen(3001, function () {
   console.log(

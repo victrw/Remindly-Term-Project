@@ -18,24 +18,12 @@ module.exports = {
   isAdmin: function (req, res, next) {
     const userId = req.user.id;
     const user = userModel.findById(userId);
-    const sessions = req.sessionStore.all();
-
-    console.log("User", user);
-    console.log("User ID", userId);
-    console.log("SessionId", req.sessionID);
-
-    req.sessions = sessions;
-
-    if (user.admin == "true") {
-      res.locals.user = req.body.admin;
-      res.render("auth/dashboard", { user: req.user, session: req.session });
+    
+    if (user.admin) {
+      return next();
     } else {
       console.error("Not an admin");
-      res.redirect("/login");
+      res.redirect("/reminders");
     }
-  },
+},
 };
-
-
-// store.all(callback)
-// store.destory
