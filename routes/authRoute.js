@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("../middleware/passport");
-const { forwardAuthenticated } = require("../middleware/checkAuth");
+const { forwardAuthenticated, isAdmin } = require("../middleware/checkAuth");
+const { userModel } = require("../models/userModel");
 
 const router = express.Router();
 
@@ -18,7 +19,16 @@ router.post(
 );
 
 router.get("/logout", (req, res) => {
-  req.logout(() => res.redirect("/login"));
+  req.logout((err) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.redirect("/login");
+  });
 });
 
+
+router.get("/dashboard", isAdmin, (req, res) => {
+  res.render("auth/dashboard");
+});
 module.exports = router;

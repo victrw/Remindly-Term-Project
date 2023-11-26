@@ -1,0 +1,11 @@
+<div class="dashboard">
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= user.name %></p>
+<p class="lead mb-3">Current Active Sessions</p>
+<p class="lead mb-3">Session ID: <%= session.id%></p>
+<p class="lead mb-3">User ID: <%= user.id %></p>
+<form action="/dashboard/revoke" method="post">
+    <button class="btn btn-primary">Revoke Sessions</button>
+</form>
+<a href="/logout" class="btn btn-secondary">Logout</a>
+</div>

@@ -82,6 +82,10 @@ let remindersController = {
     }
     res.redirect("/reminders");
   },
+
+  admin: (req, res) => {
+    res.render("auth/dashboard", {user : req.user});
+  },
 };
 
 module.exports = remindersController;
