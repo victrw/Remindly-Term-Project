@@ -84,27 +84,28 @@ let remindersController = {
     res.redirect("/reminders");
   },
 
-  ActiveUser: (req, res) => {
-    if (req.user) {
-      let users = req.sessionStore.all((err, sessions) => {
-        if (err) {
-          console.log(err);
-        }
-        return sessions;
-      });
-      let ActiveUser = [
-        {
-          sessionID: user.sessionId,
-          UserId: user.id,
-
-        }
-      ]
-      res.locals.ActiveUser = ActiveUser;
-
-
-      res.render("auth/dashboard", { user: req.user, session: req.session });
-    }
+  listActiveUser: (req, res) => {
+    let activeUsers = [];
+    res.locals.activeUsers = activeUsers;
+    const sessions = req.sessionStore.all((err, sessions) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const sessionArray = Object.values(sessions);
+        sessionArray.forEach((session) => {
+          if (session.passport) {
+            activeUsers.push({
+              sessionID: session.id,
+              userID: session.passport.user,
+            });
+          }
+        });
+        console.log(activeUsers)
+        res.render("auth/dashboard", { user: req.user, session: req.session });
+      }
+    });
   },
+  
 
   revokeSession: (req, res) => {
     const sessionIdRevoke = req.params.sessionId;

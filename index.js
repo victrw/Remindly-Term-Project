@@ -67,7 +67,8 @@ app.get("/register", authController.register);
 app.post("/register", authController.registerSubmit);
 
 //admin
-app.get("/dashboard", isAdmin, reminderController.ActiveUser);
+app.get("/dashboard", isAdmin, ensureAuthenticated, reminderController.listActiveUser);
+app.post("/dashboard", isAdmin, ensureAuthenticated, reminderController.revokeSession);
 
 
 //login

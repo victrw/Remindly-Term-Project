@@ -15,15 +15,13 @@ module.exports = {
     res.redirect("/reminders");
   },
 
-  isAdmin: function (req, res, next) {
-    const userId = req.user.id;
-    const user = userModel.findById(userId);
-    
-    if (user.admin) {
-      return next();
-    } else {
-      console.error("Not an admin");
-      res.redirect("/reminders");
+  isAdmin: (req, res, next) => {
+    if (req.isAuthenticated()) {
+      const user = userModel.findById(req.user.id);
+      if (user && user.admin) {
+        return next();
+      }
     }
-},
+    res.redirect("/login");
+  },
 };
