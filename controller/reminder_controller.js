@@ -3,7 +3,7 @@ let { database, userModel }= require("../models/userModel");
 let remindersController = {
   list: (req, res) => {
     if (req.user) {
-      res.render("reminder/index", { reminders: req.user.reminders || [] });
+      res.render("reminder/index", { reminders: req.user.reminders});
     }
   },
 

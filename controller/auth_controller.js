@@ -34,6 +34,7 @@ let authController = {
         id: database.length + 1,
         email: email,
         password: password,
+        reminders: [],
       };
       database.push(newUser);
       console.log("User created successfully")
