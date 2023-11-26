@@ -86,22 +86,23 @@ let remindersController = {
 
   listActiveUser: (req, res) => {
     let activeUsers = [];
-    res.locals.activeUsers = activeUsers;
-    const sessions = req.sessionStore.all((err, sessions) => {
+    req.sessionStore.all((err, sessions) => {
       if (err) {
         console.log(err);
       } else {
-        const sessionArray = Object.values(sessions);
-        sessionArray.forEach((session) => {
+        const sessionData = Object.keys(sessions);
+        sessionData.forEach((sessionId) => {
+          const session = sessions[sessionId];
           if (session.passport) {
             activeUsers.push({
-              sessionID: session.id,
+              sessionID: sessionId,
               userID: session.passport.user,
             });
           }
         });
-        console.log(activeUsers)
-        res.render("auth/dashboard", { user: req.user, session: req.session });
+        // console.log(activeUsers);
+        res.locals.activeUsers = activeUsers;
+        res.render("auth/dashboard", { user: req.user });
       }
     });
   },
