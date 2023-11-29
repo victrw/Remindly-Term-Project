@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("../middleware/passport");
-const { forwardAuthenticated, isAdmin } = require("../middleware/checkAuth");
+const { ensureAuthenticated, forwardAuthenticated, isAdmin } = require("../middleware/checkAuth");
 const { userModel } = require("../models/userModel");
 
 const router = express.Router();
@@ -31,5 +31,6 @@ router.get("/logout", (req, res) => {
 router.get("/dashboard", isAdmin, (req, res) => {
   res.render("auth/dashboard");
 });
+
 
 module.exports = router;
