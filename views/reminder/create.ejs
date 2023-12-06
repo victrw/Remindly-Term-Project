@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="/reminder" method="POST">
+  <form action="/reminder" method="POST" enctype="multipart/form-data">
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" class="form-control" id="titleInput" placeholder="Title" name="title">
@@ -7,6 +7,14 @@
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="cover">Upload a cover photo</label>
+      <div class="form-group">
+        <input type="file" name="cover" id="coverphoto" />
+        <label for="randomcover">Random Photo</label>
+        <input type="checkbox" name="randomcover" id="randomcoverphoto"/>
+      </div>
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>

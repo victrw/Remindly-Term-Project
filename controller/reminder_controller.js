@@ -34,6 +34,18 @@ let remindersController = {
         title: req.body.title,
         description: req.body.description,
         completed: false,
+        cover: "",
+      };
+      if (req.file) {
+        reminder.cover = req.file.path.slice(6)
+      };
+      if (req.body.randomcover === "on") {
+        fetch("https://api.unsplash.com/photos/random/?client_id=Ys783iZMcEepRik4H7SAIW4K4KFtBrmbGdEyxnGOpMA")
+        .then(response => response.json())
+        .then(data => {
+            reminder.cover = data.urls.full
+        })
+        .catch((err) => console.error(err))
       };
       req.user.reminders.push(reminder);
       res.redirect("/reminders");
@@ -107,7 +119,7 @@ let remindersController = {
     });
   },
   
-
+  
   revokeSession: (req, res) => {
     const sessionIdRevoke = req.params.sessionId;
     console.log("Revoking session", sessionIdRevoke);
@@ -121,5 +133,6 @@ let remindersController = {
     });
   },
 };
+
 
 module.exports = remindersController;
