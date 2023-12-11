@@ -25,3 +25,15 @@ I worked on the following tasks:
 4. <Hiding admin dashboard> - Users with no admin privileges will not be able to see
 5. - researched res.locals and res.sessionStore
 6. <listActiveUsers> - list all current active users with their sessionId and userId
+
+
+Dec 2nd (Third Sprint Complete)
+Chirs Tang:
+I worked on the following tasks:
+
+
+Victor Wong:
+I worked on the following tasks:
+1. <upload picture> Users are now able to upload a picture for their reminder
+2. <random picture> Users are now able to choose a random picture for their reminder
+- researched unsplashed, signed up for an account to get key
